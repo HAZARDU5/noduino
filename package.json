@@ -7,11 +7,15 @@
     "type": "git",
     "url": "git://github.com/semu/noduino.git"
   },
+
   "dependencies": {
     "serialport": "*",
     "colors": "*",
-    "kickstart": "*",
+    "kickstart": "https://github.com/HAZARDU5/node-kickstart.git",
     "socket.io": "*",
     "requirejs": "*"
+  },
+  "scripts": {
+    "start": "node srv.web.js"
   }
 }
