@@ -102,8 +102,10 @@ define(function(require, exports, module) {
   }
   
   SocketNoduino.prototype.write = function(cmd, callback) {
+    var that = this;
+    var connectedSocket = that.io;
     this.log('info', 'writing: ' + cmd);
-    this.pushSocket('serial', {'type': 'write', 'write': cmd, 'id': this.io.socket.sessionid});
+    this.pushSocket('serial', {'type': 'write', 'write': cmd, 'id': connectedSocket.io.engine.id});
   };
 
   SocketNoduino.prototype.pinMode = function(pin, val) {
