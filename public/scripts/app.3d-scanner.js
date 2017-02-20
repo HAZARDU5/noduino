@@ -3,32 +3,16 @@ var pl = 'scripts/libs/';
 require(["jquery", pv + "dropdown.js", pv + "prettify.js", pl + 'Noduino.js', pl + 'Noduino.Socket.js', pl + 'Logger.HTML.js'], function($, dd, p, NoduinoObj, Connector, Logger) {
     var Noduino = null;
 
-    var walkLED = {
-        listLED: [],
-        listButton: {},
-        current: 1,
-        direction: 1,
-        sorting: [12, 11, 10, 9, 8, 7],
-        maxLEDs: 6,
-        interval: 320};
-
-    var readyLED = function(led) {
-        walkLED.listLED[walkLED.sorting.indexOf(led.pin)] = led;
-        if (walkLED.listLED.length == walkLED.maxLEDs) {
-            Noduino.log('success', 'Loaded all LEDs');
-            startSequence(-1, walkLED.interval);
-        }
-    };
 
     function addButton(Button, dir) {
-        walkLED.listButton[Button.pin] = Button;
+        //walkLED.listButton[Button.pin] = Button;
 
         Button.on('release', function(e) {
             $('#btn-' + e.pin).removeClass('btn-warning');
         });
 
         Button.on('push', function(e) {
-            var newDirection = walkLED.direction;
+            /*var newDirection = walkLED.direction;
 
             switch (e.pin) {
                 case '04': newDirection = -1; break;
@@ -40,38 +24,59 @@ require(["jquery", pv + "dropdown.js", pv + "prettify.js", pl + 'Noduino.js', pl
 
             if (newDirection != walkLED.direction) {
                 startSequence(newDirection, walkLED.interval);
-            }
+            }*/
         });
     }
 
-    function stepper() {
-        var next = walkLED.current + walkLED.direction;
-        if (next == walkLED.maxLEDs + 1) {
-            next = 1; }
-        if (next == 0) {
-            next = walkLED.maxLEDs; }
-        walkLED.current = next;
-        $('#leds .btn').removeClass('btn-warning');
-        for (var i = 1; i <= walkLED.maxLEDs; i++) {
-            walkLED.listLED[i-1].setOff(); }
-        walkLED.listLED[(walkLED.current-1)].setOn();
-        Noduino.log('gui', 'setting on LED #led-' + walkLED.current);
-        $('#led-' + walkLED.current).addClass('btn-warning');
-    }
-
-    function startSequence(step, interval) {
-        if (walkLED.listLED.length != walkLED.maxLEDs) {
-            return; };
-
-        clearInterval(walkLED.currentStepper);
-        walkLED.direction = step || 1;
-        walkLED.currentStepper = setInterval(function() {
-            return stepper();
-        }, interval);
-    }
 
     var createObjects = function(board) {
-        board.withLED({pin: 12}, function(err, LED) { readyLED(LED); });
+
+        console.log(Noduino);
+
+        //Noduino.write('99000001'); //toggle debug mode on
+
+        //ABCDEFGHIJ
+
+        //Write is AB = commandID, CD = pin number, EFG = data value to send to command, HIJ = aux
+
+        $('#elevator-up-btn').click(function(e) {
+            e.preventDefault();
+            Noduino.write('8000016000'); //move elevator up at speed of 128
+        });
+
+        $('#elevator-jog-up-btn').click(function(e) {
+            e.preventDefault();
+            Noduino.write('7800128000'); //job elevator up at speed of 128
+        });
+
+        $('#elevator-down-btn').click(function(e) {
+            e.preventDefault();
+            Noduino.write('81000160000'); //move elevator down at speed of 128
+        });
+
+        $('#elevator-jog-down-btn').click(function(e) {
+            e.preventDefault();
+            Noduino.write('79001280000'); //jog elevator down at speed of 128
+        });
+
+        $('#platform-start-btn').click(function(e) {
+            e.preventDefault();
+            Noduino.write('84002550000'); //rotate platform clockwise full speed
+        });
+
+        $('#platform-stop-btn').click(function(e) {
+            e.preventDefault();
+            Noduino.write('85000000000'); //stop platform
+        });
+
+        /*Noduino.write('81000000000'); //move elevator down
+         Noduino.write('82000000000'); //hard stop elevator
+         Noduino.write('83000000000'); //soft stop elevator
+         Noduino.write('84002550000'); //rotate platform clockwise*/
+
+        //board.withButton({}, function(err, Button) { addButton(Button); $('#btn-02').click(function(e) {e.preventDefault(); Button.setOn(); Button.setOff(); }); });
+
+        /*board.withLED({pin: 12}, function(err, LED) { readyLED(LED); });
         board.withLED({pin: 11}, function(err, LED) { readyLED(LED); });
         board.withLED({pin: 10}, function(err, LED) { readyLED(LED); });
         board.withLED({pin:  9}, function(err, LED) { readyLED(LED); });
@@ -85,7 +90,7 @@ require(["jquery", pv + "dropdown.js", pv + "prettify.js", pl + 'Noduino.js', pl
                 $('#interval-value').val(a.value + 'ms');
                 walkLED.interval = a.value; startSequence(walkLED.direction, walkLED.interval);
             });
-        });
+        });*/
 
     };
 
