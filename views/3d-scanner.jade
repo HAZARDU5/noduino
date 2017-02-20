@@ -1,0 +1,39 @@
+header#overview
+  .page-header
+    h1 3D Scanner
+      small  Control the 3D scanner
+  .page-header
+    h1 HTML5 WebSocket Interface
+      small Using Socket.IO and Node.js
+  .row.interface#controls
+    .span12
+      .btn-toolbar(style="margin-bottom: 9px")
+        .btn-group
+          a.btn(href="#")#connect
+            i.icon-refresh
+            |  Connect to Arduino
+        .btn-group
+          input.range#interval-slide(type="range", min="0", max="255", step="1", value="0")
+
+  .row.info#connection-status
+    .span12
+      .alert.alert-info Please connect to your Arduino using the button.
+      .alert.hide.alert-error Unable to connect to Arduino!
+      .alert.hide.alert-success Connection to Arduino established!
+  .row.debug
+    .span12
+      pre#connection-log
+        .item $ > Not connected to noduino!
+  .row
+    .span12
+      p This interface is defined in
+        code views/3d-scanner.jade
+        | , all needed JavaScript is stored in
+        code public/scripts/app.3d-scanner.js
+        |  using
+        a(href="http://requirejs.org/") RequireJS
+        |  for loading dependencies. Please see RequireJS's manual for loading your scripts. Logging is done with the customized
+        code Logger.HTML.js
+        |  in
+        code scripts/libs/
+        | .

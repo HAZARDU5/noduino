@@ -51,6 +51,13 @@ define(['kickstart', 'module', 'path', 'fs'], function (kickstart, module, path,
   srv.all('/example-walkLED.html', function(req, res) {
     res.render('example-walkLED', {hostname: hostname, jsApp: 'walkLED', active: 'examples', title: 'noduino', 'examples': examples});
   });
+
+  /**
+   * Catch request for serving 3D scanner page
+   */
+  srv.all('/3d-scanner.html', function(req, res) {
+    res.render('3d-scanner', {hostname: hostname, jsApp: '3d-scanner', active: '3d-scanner', title: 'noduino', 'examples': examples});
+  });
   
   /**
    * Catch request for serving motor example
