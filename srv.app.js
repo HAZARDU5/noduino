@@ -12,7 +12,7 @@ define(['kickstart', 'module', 'path', 'fs'], function (kickstart, module, path,
   var args = process.argv.splice(2);
 
   var hostname = args[0] || 'localhost';
-  var port = args[1] || 8080;
+  var port = args[1] || 3001;
   var host = hostname + ':' + port;
 
   var kickstart = kickstart.withConfig({'name': hostname, 'port': port, 'path': './'});

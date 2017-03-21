@@ -20,5 +20,13 @@ npm install
     npm start
     ```
 
-2.  Then browse to [http://localhost:8080](http://localhost:8080)
+    OR
+
+    ```
+    npm start YOUR_IP
+    ```
+
+    where `YOUR_IP` is the address of your computer on the network.
+
+2.  Then browse to [http://localhost:3001](http://localhost:3001)
 
