@@ -1,0 +1,22 @@
+{
+  "name": "noduino",
+  "description": "Arduino framework for fuck*ng mad scientists",
+  "main": "",
+  "authors": [
+    "Sebastian Müller <c@semu.mp>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/HAZARDU5/noduino",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/scripts/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

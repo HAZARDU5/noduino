@@ -7,15 +7,26 @@
     "type": "git",
     "url": "git://github.com/semu/noduino.git"
   },
-
   "dependencies": {
-    "serialport": "*",
     "colors": "*",
     "kickstart": "https://github.com/HAZARDU5/node-kickstart.git",
-    "socket.io": "*",
-    "requirejs": "*"
+    "requirejs": "*",
+    "serialport": "*",
+    "socket.io": "*"
   },
   "scripts": {
-    "start": "node srv.web.js"
+    "start": "parallelshell 'node_modules/.bin/node-sass -w public/sass -o public/styles' 'node srv.web.js'",
+    "styles:watch": "node_modules/.bin/node-sass -w public/sass/ -o public/styles",
+    "styles:build": "node_modules/.bin/node-sass public/sass/ -o public/styles",
+    "build:require-jquery": "rm -rf require-jquery; git clone https://github.com/requirejs/require-jquery.git && cd require-jquery/parts && ./update.sh && cd ../../ && mv require-jquery/jquery-require-sample/webapp/scripts/require-jquery.js public/scripts/vendor/require-jquery.js && rm -rf require-jquery"
+  },
+  "devDependencies": {
+    "bower": "^1.8.0",
+    "jquery": "^1.9.1",
+    "node-sass": "^4.5.1",
+    "parallelshell": "^2.0.0",
+    "require.js": "^1.0.0",
+    "webpack": "^2.3.0",
+    "webpack-dev-middleware": "^1.10.1"
   }
 }

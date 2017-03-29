@@ -1,0 +1,26 @@
+.container, .navbar-brand {
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-right: auto;
+  margin-left: auto; }
+
+.page-header {
+  margin-top: 70px; }
+
+#connection-log {
+  min-height: 180px; }
+
+#controls div[class^="col-xs-"] > .btn:first-child {
+  width: 100%; }
+
+#controls .alert {
+  margin-bottom: 0; }
+
+#controls .btn#connect {
+  height: 70px; }
+
+#controls .btn.btn-app {
+  display: block;
+  min-width: 40px;
+  height: 60px;
+  margin: 0; }
