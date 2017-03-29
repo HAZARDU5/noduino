@@ -11,7 +11,8 @@ define(['./Board.js'], function (objBoard) {
     this.logger       = new Logger(options);
     this.options      = options;    
     this.options.type = this.c.connection;
-    this.connected    = false;    
+    this.connected    = false;
+    this.board        = null;
     
     this.setLoggerOptions();
     this.setLogger();
@@ -50,11 +51,14 @@ define(['./Board.js'], function (objBoard) {
 
   Noduino.prototype.connect = function(options, callback) {
     this.log('connecting to noduino');
-    
+
     if (!callback) {
       callback = options; options = {}; }
     var that = this;
     this.c.connect(options, function(err, board) {
+
+      that.board = board;
+
       if (err) { return callback(err); }    
       that.connected = true;
       callback(null, new objBoard(options, that.c));
